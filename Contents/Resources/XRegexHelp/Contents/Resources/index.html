@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+	<head>
+		<title>XRegex Reference</title>
+		<meta name="AppleTitle" content="XRegex Reference" />
+
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+		<link href="assets/default.css" type="text/css" rel="stylesheet" media="all" />
+        <link href="assets/applescript.css" type="text/css" rel="stylesheet" media="all" />
+		<meta name="keywords" content="XRegex, AppleScript" />
+		<script type="text/javascript" src="assets-helpbook/run_helpscript.js"></script>
+		<script type="text/javascript" src="assets/navibar-jump.js"></script>
+        <link id="helpviewer-handler-helper" href="assets-helpbook/helpviewer-handler-helper.scpt" />
+        <script type="text/javascript" src="assets-helpbook/helpviewer-handler-enable.js"></script>
+        <link href="./" id="HelpBookRoot" />
+	</head>
+
+	<body>
+		<div id="navi-bar">
+			<div class="edit-script-link">
+				<a onclick="return runHelpScriptWithBundleRoot(this)" href="assets-helpbook/editScript.scpt">Edit Script</a>
+			</div>
+			<div class="left-contents">
+			<div class="to-root">
+				<!-- InstanceBeginEditable name="to-root" --><!-- InstanceEndEditable -->
+			</div>
+			<select onchange="navibarJump(this)">
+<option value="">
+§
+</option>
+<option value="#Examples">
+Examples
+</option>
+<option value="#Class_Methods">
+Class Methods
+</option>
+<option value="#search">
+- search
+</option>
+<option value="#search_all">
+- search_all
+</option>
+<option value="#count_matches">
+- count_matches
+</option>
+<option value="#replace_matches">
+- replace_matches
+</option>
+<option value="#Constructor_Methods">
+Constructor Methods
+</option>
+<option value="#make_with">
+- make_with
+</option>
+<option value="#Instance_Methods">
+Instance Methods
+</option>
+<option value="#first_match">
+- first_match
+</option>
+<option value="#matches_in">
+- matches_in
+</option>
+<option value="#count_in">
+- count_in
+</option>
+<option value="#replace">
+- replace
+</option>
+<option value="#MatchResult">
+MatchResult 
+</option>
+<option value="#count">
+- count
+</option>
+<option value="#capture">
+- capture
+</option>
+<option value="#as_text">
+- as_text
+</option>
+<option value="#range">
+- range
+</option>
+<option value="#substring">
+- substring
+</option>
+<option value="#substring_from">
+- substring_from
+</option>
+</select>
+			</div>
+		</div>
+		<!-- InstanceBeginEditable name="prev-next-item" --><!-- InstanceEndEditable -->
+		<div id="contents">
+		<h1>XRegex Reference</h1>
+<ul>
+<li>Version : 1.0</li>
+<li>Author : Kurita Tetsuro <a href="mailto:scriptfactory@mac.com">scriptfactory@mac.com</a></li>
+<li>Requirements : OS X 10.9 or later</li>
+<li><a href="http://www.script-factory.net/XModules/XRegex/en/index.html">Home page</a> || <a href="http://www.script-factory.net/XModules/XRegex/changelog.html">ChangeLog</a> || <a href="https://github.com/tkurita/XRegex.scptd">Repository</a> </li>
+</ul>
+<p>XReguex is an AppleScript library to process text with regular rexpressions. It&apos;s a wrapper of <a href="https://developer.apple.com/documentation/foundation/nsregularexpression?language=objc">NSRegularExpression</a>.</p>
+<p>In simple cases, class methods of <a href="pages/search.html">search</a>, <a href="pages/search_all.html">search_all</a> and <a href="pages/replace_matches.html">replace_matches</a>.</p>
+<p><a href="pages/search.html">search</a> methods returns a <a href="#MatchResult">MatchResult</a> object for first matched text.When matched texts with the regular expressions can not be found, missig value is returned.</p>
+<p>You can obtaine matched texts and range by using <a href="pages/capture.html">capture</a> and <a href="pages/range.html">range</a> methods of <a href="#MatchResult">MatchResult</a> object.</p>
+<p>When the regular expression is used repeatedly, compile the regular rexpression with <a href="pages/make_with.html">make_with</a> and store obtained XRegex instance. And use instance methods of <a href="pages/first_match.html">first_match</a>, <a href="pages/matches_in.html">matches_in</a>, <a href="pages/replace.html">replace</a>.</p>
+<p>For syntax of regular expression, see the pages of <a href="https://developer.apple.com/documentation/foundation/nsregularexpression?language=objc">NSRegularExpression</a> and <a href="http://userguide.icu-project.org/strings/regexp">ICU</a>.</p>
+<h2 id="Examples">Examples</h2>
+<div class="sourceCode">
+<div class="scriptButton">
+    <input type="button" value="Open this script" onclick="document.location = this.src" src="applescript://com.apple.scripteditor?action=new&amp;script=use%20XRegex%20:%20script%20%22XRegex%22%0D%0D(***%20Using%20Class%20methods%20***)%0D--%20Obtain%20first%20matche%0Dtell%20XRegex%27s%20search(%22%5C%5Cd%7B4%7D%22,%20%221972-01-27%22)%0D%09if%20it%20is%20not%20missing%20value%20then%0D%09%09log%20capture(0)%20(*1972*)%0D%09%09log%20range(0)%20(*length:4,%20location:0*)%0D%09end%20if%0Dend%20tell%0D%0D--%20Obtain%20all%20mathes%0Dtell%20XRegex%27s%20search_all(%22%5C%5Cd%7B2%7D%22,%20%221972-01-27%22)%0D%09repeat%20with%20a_match%20in%20it%0D%09%09tell%20a_match%0D%09%09%09log%20capture(0)%0D%09%09%09log%20range(0)%0D%09%09%09(*19*)%0D%09%09%09(*length:2,%20location:0*)%0D%09%09%09(*72*)%0D%09%09%09(*length:2,%20location:2*)%0D%09%09%09(*01*)%0D%09%09%09(*length:2,%20location:5*)%0D%09%09%09(*27*)%0D%09%09%09(*length:2,%20location:8*)%0D%09%09end%20tell%0D%09end%20repeat%0Dend%20tell%0D%0D--%20Replace%0Dlog%20XRegex%27s%20replace_matches(%22%5C%5Cd%7B2%7D%22,%20%221972-01-27%22,%20%22xx%22)%20(*xxxx-xx-xx*)%0D%0D(***%20Compiling%20Regular%20Expression%20and%20Working%20with%20Instance%20Methods%20***)%0D--%20Simple%20cases%0Dtell%20XRegex%27s%20make_with(%22(%5C%5Cd%7B4%7D)-%5C%5Cd%7B1,2%7D-%5C%5Cd%7B1,2%7D%22)%0D%09log%20count_in(%222020-10-10%22)%20(*1*)%0D%09%0D%09tell%20first_match(%222020-10-10%22)%0D%09%09if%20it%20is%20not%20missing%20value%20then%0D%09%09%09log%20(count%20it)%20(*2*)%0D%09%09%09log%20its%20capture(0)%20--%202020-10-10%20:%20whole%20match%0D%09%09%09log%20its%20capture(1)%20--%202020%20:%20first%20capture%0D%09%09end%20if%0D%09end%20tell%0Dend%20tell%0D%0D--%20Obtain%20matched%20all%20sub-texts%0Dtell%20XRegex%27s%20make_with(%22%5C%5Cd%7B2%7D%22)%0D%09set%20matches%20to%20matches_in(%222021-10-20%22)%0Dend%20tell%0Dlog%20(count%20matches)%20(*4*)%0Dtell%20item%201%20of%20matches%0D%09log%20(count%20it)%20(*1*)%0D%09log%20capture(0)%20(*20*)%0D%09log%20range(0)%20(*length:2,%20location:0*)%0Dend%20tell%0D%0Dtell%20item%202%20of%20matches%0D%09log%20(count%20it)%20(*1*)%0D%09log%20capture(0)%20(*21*)%0D%09set%20%7Blocation:loc,%20length:len%7D%20to%20range(0)%20(*length:2,%20location:2*)%0D%09--obtain%20substring%0D%09log%20substring(loc%20%2B%203,%20len)%20(*10*)%0Dend%20tell%0D%0D%0D--%20Replace%0Dtell%20XRegex%27s%20make_with(%22http://(%5B%5E/%5D%2B)(/%5B%5E/%5D%2B)*%22)%0D%09log%20replace(%22http://www.script-factory.net/index.html%22,%20%C2%AC%0D%09%09%22https://$1%22)%0D%09(*https://www.script-factory.net*)%0Dend%20tell" />
+</div><div>
+<span class="langKeyword">use</span> <span class="userDefine">XRegex</span><span class="normal"> : </span><span class="className">script</span><span class="normal"> &quot;XRegex&quot;</span>
+</div>
+<br />
+<div>
+<span class="comment">(*** Using Class methods ***)</span>
+</div>
+<div>
+<span class="comment">-- Obtain first matche</span>
+</div>
+<div>
+<span class="langKeyword">tell</span> <span class="userDefine">XRegex's</span> <span class="userDefine">search</span><span class="normal">(&quot;\\d{4}&quot;, &quot;1972-01-27&quot;)</span>
+</div>
+<div style="text-indent:4ex;">
+<span class="langKeyword">if</span> <span class="langKeyword">it</span> <span class="langKeyword">is</span> <span class="langKeyword">not</span> <span class="className">missing value</span> <span class="langKeyword">then</span>
+</div>
+<div style="text-indent:8ex;">
+<span class="commandName">log</span> <span class="userDefine">capture</span><span class="normal">(0) </span><span class="comment">(*1972*)</span>
+</div>
+<div style="text-indent:8ex;">
+<span class="commandName">log</span> <span class="userDefine">range</span><span class="normal">(0) </span><span class="comment">(*length:4, location:0*)</span>
+</div>
+<div style="text-indent:4ex;">
+<span class="langKeyword">end</span> <span class="langKeyword">if</span>
+</div>
+<div>
+<span class="langKeyword">end</span> <span class="langKeyword">tell</span>
+</div>
+<br />
+<div>
+<span class="comment">-- Obtain all mathes</span>
+</div>
+<div>
+<span class="langKeyword">tell</span> <span class="userDefine">XRegex's</span> <span class="userDefine">search_all</span><span class="normal">(&quot;\\d{2}&quot;, &quot;1972-01-27&quot;)</span>
+</div>
+<div style="text-indent:4ex;">
+<span class="langKeyword">repeat</span> <span class="langKeyword">with</span> <span class="userDefine">a_match</span> <span class="langKeyword">in</span> <span class="langKeyword">it</span>
+</div>
+<div style="text-indent:8ex;">
+<span class="langKeyword">tell</span> <span class="userDefine">a_match</span>
+</div>
+<div style="text-indent:12ex;">
+<span class="commandName">log</span> <span class="userDefine">capture</span><span class="normal">(0)</span>
+</div>
+<div style="text-indent:12ex;">
+<span class="commandName">log</span> <span class="userDefine">range</span><span class="normal">(0)</span>
+</div>
+<div style="text-indent:12ex;">
+<span class="comment">(*19*)</span>
+</div>
+<div style="text-indent:12ex;">
+<span class="comment">(*length:2, location:0*)</span>
+</div>
+<div style="text-indent:12ex;">
+<span class="comment">(*72*)</span>
+</div>
+<div style="text-indent:12ex;">
+<span class="comment">(*length:2, location:2*)</span>
+</div>
+<div style="text-indent:12ex;">
+<span class="comment">(*01*)</span>
+</div>
+<div style="text-indent:12ex;">
+<span class="comment">(*length:2, location:5*)</span>
+</div>
+<div style="text-indent:12ex;">
+<span class="comment">(*27*)</span>
+</div>
+<div style="text-indent:12ex;">
+<span class="comment">(*length:2, location:8*)</span>
+</div>
+<div style="text-indent:8ex;">
+<span class="langKeyword">end</span> <span class="langKeyword">tell</span>
+</div>
+<div style="text-indent:4ex;">
+<span class="langKeyword">end</span> <span class="langKeyword">repeat</span>
+</div>
+<div>
+<span class="langKeyword">end</span> <span class="langKeyword">tell</span>
+</div>
+<br />
+<div>
+<span class="comment">-- Replace</span>
+</div>
+<div>
+<span class="commandName">log</span> <span class="userDefine">XRegex's</span> <span class="userDefine">replace_matches</span><span class="normal">(&quot;\\d{2}&quot;, &quot;1972-01-27&quot;, &quot;xx&quot;) </span><span class="comment">(*xxxx-xx-xx*)</span>
+</div>
+<br />
+<div>
+<span class="comment">(*** Compiling Regular Expression and Working with Instance Methods ***)</span>
+</div>
+<div>
+<span class="comment">-- Simple cases</span>
+</div>
+<div>
+<span class="langKeyword">tell</span> <span class="userDefine">XRegex's</span> <span class="userDefine">make_with</span><span class="normal">(&quot;(\\d{4})-\\d{1,2}-\\d{1,2}&quot;)</span>
+</div>
+<div style="text-indent:4ex;">
+<span class="commandName">log</span> <span class="userDefine">count_in</span><span class="normal">(&quot;2020-10-10&quot;) </span><span class="comment">(*1*)</span>
+</div>
+<br />
+<div style="text-indent:4ex;">
+<span class="langKeyword">tell</span> <span class="userDefine">first_match</span><span class="normal">(&quot;2020-10-10&quot;)</span>
+</div>
+<div style="text-indent:8ex;">
+<span class="langKeyword">if</span> <span class="langKeyword">it</span> <span class="langKeyword">is</span> <span class="langKeyword">not</span> <span class="className">missing value</span> <span class="langKeyword">then</span>
+</div>
+<div style="text-indent:12ex;">
+<span class="commandName">log</span><span class="normal"> (</span><span class="commandName">count</span> <span class="langKeyword">it</span><span class="normal">) </span><span class="comment">(*2*)</span>
+</div>
+<div style="text-indent:12ex;">
+<span class="commandName">log</span> <span class="langKeyword">its</span> <span class="userDefine">capture</span><span class="normal">(0) </span><span class="comment">-- 2020-10-10 : whole match</span>
+</div>
+<div style="text-indent:12ex;">
+<span class="commandName">log</span> <span class="langKeyword">its</span> <span class="userDefine">capture</span><span class="normal">(1) </span><span class="comment">-- 2020 : first capture</span>
+</div>
+<div style="text-indent:8ex;">
+<span class="langKeyword">end</span> <span class="langKeyword">if</span>
+</div>
+<div style="text-indent:4ex;">
+<span class="langKeyword">end</span> <span class="langKeyword">tell</span>
+</div>
+<div>
+<span class="langKeyword">end</span> <span class="langKeyword">tell</span>
+</div>
+<br />
+<div>
+<span class="comment">-- Obtain matched all sub-texts</span>
+</div>
+<div>
+<span class="langKeyword">tell</span> <span class="userDefine">XRegex's</span> <span class="userDefine">make_with</span><span class="normal">(&quot;\\d{2}&quot;)</span>
+</div>
+<div style="text-indent:4ex;">
+<span class="langKeyword">set</span> <span class="userDefine">matches</span> <span class="langKeyword">to</span> <span class="userDefine">matches_in</span><span class="normal">(&quot;2021-10-20&quot;)</span>
+</div>
+<div>
+<span class="langKeyword">end</span> <span class="langKeyword">tell</span>
+</div>
+<div>
+<span class="commandName">log</span><span class="normal"> (</span><span class="commandName">count</span> <span class="userDefine">matches</span><span class="normal">) </span><span class="comment">(*4*)</span>
+</div>
+<div>
+<span class="langKeyword">tell</span> <span class="className">item</span><span class="normal"> 1 </span><span class="langKeyword">of</span> <span class="userDefine">matches</span>
+</div>
+<div style="text-indent:4ex;">
+<span class="commandName">log</span><span class="normal"> (</span><span class="commandName">count</span> <span class="langKeyword">it</span><span class="normal">) </span><span class="comment">(*1*)</span>
+</div>
+<div style="text-indent:4ex;">
+<span class="commandName">log</span> <span class="userDefine">capture</span><span class="normal">(0) </span><span class="comment">(*20*)</span>
+</div>
+<div style="text-indent:4ex;">
+<span class="commandName">log</span> <span class="userDefine">range</span><span class="normal">(0) </span><span class="comment">(*length:2, location:0*)</span>
+</div>
+<div>
+<span class="langKeyword">end</span> <span class="langKeyword">tell</span>
+</div>
+<br />
+<div>
+<span class="langKeyword">tell</span> <span class="className">item</span><span class="normal"> 2 </span><span class="langKeyword">of</span> <span class="userDefine">matches</span>
+</div>
+<div style="text-indent:4ex;">
+<span class="commandName">log</span><span class="normal"> (</span><span class="commandName">count</span> <span class="langKeyword">it</span><span class="normal">) </span><span class="comment">(*1*)</span>
+</div>
+<div style="text-indent:4ex;">
+<span class="commandName">log</span> <span class="userDefine">capture</span><span class="normal">(0) </span><span class="comment">(*21*)</span>
+</div>
+<div style="text-indent:4ex;">
+<span class="langKeyword">set</span><span class="normal"> {</span><span class="userDefine">location</span><span class="normal">:</span><span class="userDefine">loc</span><span class="normal">, </span><span class="propertyName">length</span><span class="normal">:</span><span class="userDefine">len</span><span class="normal">} </span><span class="langKeyword">to</span> <span class="userDefine">range</span><span class="normal">(0) </span><span class="comment">(*length:2, location:2*)</span>
+</div>
+<div style="text-indent:4ex;">
+<span class="comment">--obtain substring</span>
+</div>
+<div style="text-indent:4ex;">
+<span class="commandName">log</span> <span class="userDefine">substring</span><span class="normal">(</span><span class="userDefine">loc</span><span class="normal"> + 3, </span><span class="userDefine">len</span><span class="normal">) </span><span class="comment">(*10*)</span>
+</div>
+<div>
+<span class="langKeyword">end</span> <span class="langKeyword">tell</span>
+</div>
+<br /><br />
+<div>
+<span class="comment">-- Replace</span>
+</div>
+<div>
+<span class="langKeyword">tell</span> <span class="userDefine">XRegex's</span> <span class="userDefine">make_with</span><span class="normal">(&quot;http://([^/]+)(/[^/]+)*&quot;)</span>
+</div>
+<div style="text-indent:4ex;">
+<span class="commandName">log</span> <span class="userDefine">replace</span><span class="normal">(&quot;http://www.script-factory.net/index.html&quot;, ¬</span>
+</div>
+<div style="text-indent:8ex;">
+<span class="normal">&quot;https://$1&quot;)</span>
+</div>
+<div style="text-indent:4ex;">
+<span class="comment">(*https://www.script-factory.net*)</span>
+</div>
+<div>
+<span class="langKeyword">end</span> <span class="langKeyword">tell</span>
+</div>
+</div>
+<h2 id="Class_Methods">Class Methods</h2>
+<h3 id="search"><a href="pages/search.html">search</a></h3>
+<p>Returns the first match of the regular expression in the text.</p>
+<h3 id="search_all"><a href="pages/search_all.html">search_all</a></h3>
+<p>Returns a list containing all the matches of the regular expression in the text.</p>
+<h3 id="count_matches"><a href="pages/count_matches.html">count_matches</a></h3>
+<p>Returns the number of matches of the regular expression in the text.</p>
+<h3 id="replace_matches"><a href="pages/replace_matches.html">replace_matches</a></h3>
+<p>Returns a new text containing matching regular expressions replaced with the template text.</p>
+<h2 id="Constructor_Methods">Constructor Methods</h2>
+<h3 id="make_with"><a href="pages/make_with.html">make_with</a></h3>
+<p>Compile a regular expression and return a new XRegex instance.</p>
+<h2 id="Instance_Methods">Instance Methods</h2>
+<h3 id="first_match"><a href="pages/first_match.html">first_match</a></h3>
+<p>Returns the first match of the regular expression in the text.</p>
+<h3 id="matches_in"><a href="pages/matches_in.html">matches_in</a></h3>
+<p>Returns a list containing all the matches of the regular expression in the text.</p>
+<h3 id="count_in"><a href="pages/count_in.html">count_in</a></h3>
+<p>Returns the number of matches of the regular expression in the text.</p>
+<h3 id="replace"><a href="pages/replace.html">replace</a></h3>
+<p>Returns a new text containing matching regular expressions replaced with the template text.</p>
+<h2 id="MatchResult">MatchResult </h2>
+<p>MatchResult is a wapper of <a href="https://developer.apple.com/documentation/foundation/nstextcheckingresult?language=objc">NSTextCheckingResult</a> which expresses pattern maching results. Each MatchResult object contains infomation about matched texts with the pattern and caputred groups. These infomation can be obtained by using <a href="pages/capture.html">capture</a> and <a href="pages/range.html">range</a> methods.</p>
+<p>MatchResult objects are returned by <a href="pages/search.html">search</a>, <a href="pages/search_all.html">search_all</a>, <a href="pages/first_match.html">first_match</a> and <a href="pages/matches_in.html">matches_in</a>.</p>
+<p>The location value of <a href="pages/range.html">range</a> is zero based i.e. follows the manner of NSString not the manner of AppleScript&apos;s text.To obtain substring of the range calculated from returned value of <a href="pages/range.html">range</a> in the searched text, use <a href="pages/substring.html">substring</a> or <a href="pages/substring_from.html">substring_from</a>, because NSString&apos;s character counts and indexes may not be able to exchanged for AppleScript&apos;s text.</p>
+<h3 id="count"><a href="pages/count.html">count</a></h3>
+<p>Returns a number of matched ranges.</p>
+<h3 id="capture"><a href="pages/capture.html">capture</a></h3>
+<p>Returns a text matched with the regular expression and texts of capture groups.</p>
+<h3 id="as_text"><a href="pages/as_text.html">as_text</a></h3>
+<p>Returns a whole text matched with the regular expression.</p>
+<h3 id="range"><a href="pages/range.html">range</a></h3>
+<p>Returns the range mateched with the regular expression and groups.</p>
+<h3 id="substring"><a href="pages/substring.html">substring</a></h3>
+<p>Returns the substring specified with location and langth in searched text </p>
+<h3 id="substring_from"><a href="pages/substring_from.html">substring_from</a></h3>
+<p>Returns the substring from specified location to the end in searched text.</p>
+		</div>
+		<!-- InstanceBeginEditable name="prev-next-item" --><!-- InstanceEndEditable -->
+	</body>
+
+</html>

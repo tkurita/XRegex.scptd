@@ -5,8 +5,8 @@
 
 	<head>
 		<title>XRegex Reference</title>
-		<meta name="AppleTitle" content="XRegex Reference" />
-
+		<meta name="AppleTitle" content="XRegex Reference">
+</meta>
 		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
 		<link href="assets/default.css" type="text/css" rel="stylesheet" media="all" />
         <link href="assets/applescript.css" type="text/css" rel="stylesheet" media="all" />
@@ -70,6 +70,9 @@ Instance Methods
 <option value="#replace">
 - replace
 </option>
+<option value="#split">
+- split
+</option>
 <option value="#MatchResult">
 MatchResult 
 </option>
@@ -112,7 +115,7 @@ MatchResult
 <h2 id="Examples">Examples</h2>
 <div class="sourceCode">
 <div class="scriptButton">
-    <input type="button" value="Open this script" onclick="document.location = this.src" src="applescript://com.apple.scripteditor?action=new&amp;script=use%20XRegex%20:%20script%20%22XRegex%22%0D%0D(***%20Using%20Class%20methods%20***)%0D--%20Obtain%20first%20matche%0Dtell%20XRegex%27s%20search(%22%5C%5Cd%7B4%7D%22,%20%221972-01-27%22)%0D%09if%20it%20is%20not%20missing%20value%20then%0D%09%09log%20capture(0)%20(*1972*)%0D%09%09log%20range(0)%20(*length:4,%20location:0*)%0D%09end%20if%0Dend%20tell%0D%0D--%20Obtain%20all%20mathes%0Dtell%20XRegex%27s%20search_all(%22%5C%5Cd%7B2%7D%22,%20%221972-01-27%22)%0D%09repeat%20with%20a_match%20in%20it%0D%09%09tell%20a_match%0D%09%09%09log%20capture(0)%0D%09%09%09log%20range(0)%0D%09%09%09(*19*)%0D%09%09%09(*length:2,%20location:0*)%0D%09%09%09(*72*)%0D%09%09%09(*length:2,%20location:2*)%0D%09%09%09(*01*)%0D%09%09%09(*length:2,%20location:5*)%0D%09%09%09(*27*)%0D%09%09%09(*length:2,%20location:8*)%0D%09%09end%20tell%0D%09end%20repeat%0Dend%20tell%0D%0D--%20Replace%0Dlog%20XRegex%27s%20replace_matches(%22%5C%5Cd%7B2%7D%22,%20%221972-01-27%22,%20%22xx%22)%20(*xxxx-xx-xx*)%0D%0D(***%20Compiling%20Regular%20Expression%20and%20Working%20with%20Instance%20Methods%20***)%0D--%20Simple%20cases%0Dtell%20XRegex%27s%20make_with(%22(%5C%5Cd%7B4%7D)-%5C%5Cd%7B1,2%7D-%5C%5Cd%7B1,2%7D%22)%0D%09log%20count_in(%222020-10-10%22)%20(*1*)%0D%09%0D%09tell%20first_match(%222020-10-10%22)%0D%09%09if%20it%20is%20not%20missing%20value%20then%0D%09%09%09log%20(count%20it)%20(*2*)%0D%09%09%09log%20its%20capture(0)%20--%202020-10-10%20:%20whole%20match%0D%09%09%09log%20its%20capture(1)%20--%202020%20:%20first%20capture%0D%09%09end%20if%0D%09end%20tell%0Dend%20tell%0D%0D--%20Obtain%20matched%20all%20sub-texts%0Dtell%20XRegex%27s%20make_with(%22%5C%5Cd%7B2%7D%22)%0D%09set%20matches%20to%20matches_in(%222021-10-20%22)%0Dend%20tell%0Dlog%20(count%20matches)%20(*4*)%0Dtell%20item%201%20of%20matches%0D%09log%20(count%20it)%20(*1*)%0D%09log%20capture(0)%20(*20*)%0D%09log%20range(0)%20(*length:2,%20location:0*)%0Dend%20tell%0D%0Dtell%20item%202%20of%20matches%0D%09log%20(count%20it)%20(*1*)%0D%09log%20capture(0)%20(*21*)%0D%09set%20%7Blocation:loc,%20length:len%7D%20to%20range(0)%20(*length:2,%20location:2*)%0D%09--obtain%20substring%0D%09log%20substring(loc%20%2B%203,%20len)%20(*10*)%0Dend%20tell%0D%0D%0D--%20Replace%0Dtell%20XRegex%27s%20make_with(%22http://(%5B%5E/%5D%2B)(/%5B%5E/%5D%2B)*%22)%0D%09log%20replace(%22http://www.script-factory.net/index.html%22,%20%C2%AC%0D%09%09%22https://$1%22)%0D%09(*https://www.script-factory.net*)%0Dend%20tell" />
+    <input type="button" value="Open this script" onclick="document.location = this.src" src="applescript://com.apple.scripteditor?action=new&amp;script=use%20XRegex%20:%20script%20%22XRegex%22%0D%0D(***%20Using%20Class%20methods%20***)%0D--%20Obtain%20first%20matche%0Dtell%20XRegex%27s%20search(%22%5C%5Cd%7B4%7D%22,%20%221972-01-27%22)%0D%09if%20it%20is%20not%20missing%20value%20then%0D%09%09log%20capture(0)%20(*1972*)%0D%09%09log%20range(0)%20(*length:4,%20location:0*)%0D%09end%20if%0Dend%20tell%0D%0D--%20Obtain%20all%20mathes%0Dtell%20XRegex%27s%20search_all(%22%5C%5Cd%7B2%7D%22,%20%221972-01-27%22)%0D%09repeat%20with%20a_match%20in%20it%0D%09%09tell%20a_match%0D%09%09%09log%20capture(0)%0D%09%09%09log%20range(0)%0D%09%09%09(*19*)%0D%09%09%09(*length:2,%20location:0*)%0D%09%09%09(*72*)%0D%09%09%09(*length:2,%20location:2*)%0D%09%09%09(*01*)%0D%09%09%09(*length:2,%20location:5*)%0D%09%09%09(*27*)%0D%09%09%09(*length:2,%20location:8*)%0D%09%09end%20tell%0D%09end%20repeat%0Dend%20tell%0D%0D--%20Replace%0Dlog%20XRegex%27s%20replace_matches(%22%5C%5Cd%7B2%7D%22,%20%221972-01-27%22,%20%22xx%22)%20(*xxxx-xx-xx*)%0D%0D(***%20Compiling%20Regular%20Expression%20and%20Working%20with%20Instance%20Methods%20***)%0D--%20Simple%20cases%0Dtell%20XRegex%27s%20make_with(%22(%5C%5Cd%7B4%7D)-%5C%5Cd%7B1,2%7D-%5C%5Cd%7B1,2%7D%22)%0D%09log%20count_in(%222020-10-10%22)%20(*1*)%0D%09%0D%09tell%20first_match(%222020-10-10%22)%0D%09%09if%20it%20is%20not%20missing%20value%20then%0D%09%09%09log%20(count%20it)%20(*2*)%0D%09%09%09log%20its%20capture(0)%20--%202020-10-10%20:%20whole%20match%0D%09%09%09log%20its%20capture(1)%20--%202020%20:%20first%20capture%0D%09%09end%20if%0D%09end%20tell%0Dend%20tell%0D%0D--%20Obtain%20matched%20all%20sub-texts%0Dtell%20XRegex%27s%20make_with(%22%5C%5Cd%7B2%7D%22)%0D%09set%20matches%20to%20matches_in(%222021-10-20%22)%0Dend%20tell%0Dlog%20(count%20matches)%20(*4*)%0Dtell%20item%201%20of%20matches%0D%09log%20(count%20it)%20(*1*)%0D%09log%20capture(0)%20(*20*)%0D%09log%20range(0)%20(*length:2,%20location:0*)%0Dend%20tell%0D%0Dtell%20item%202%20of%20matches%0D%09log%20(count%20it)%20(*1*)%0D%09log%20capture(0)%20(*21*)%0D%09set%20%7Blocation:loc,%20length:len%7D%20to%20range(0)%20(*length:2,%20location:2*)%0D%09--obtain%20substring%0D%09log%20substring(loc%20%2B%203,%20len)%20(*10*)%0Dend%20tell%0D%0D--%20Replace%0Dtell%20XRegex%27s%20make_with(%22http://(%5B%5E/%5D%2B)(/%5B%5E/%5D%2B)*%22)%0D%09log%20replace(%22http://www.script-factory.net/index.html%22,%20%C2%AC%0D%09%09%22https://$1%22)%0D%09(*https://www.script-factory.net*)%0Dend%20tell%0D%0D--%20split%0Dtell%20XRegex%27s%20make_with(%22%5C%5Cs*,%5C%5Cs*%22)%0D%09log%20split(%22a%09,%09b,c%22)%0D%09(*a,%20b,%20c*)%0Dend%20tell" />
 </div><div>
 <span class="langKeyword">use</span> <span class="userDefine">XRegex</span><span class="normal"> : </span><span class="className">script</span><span class="normal"> &quot;XRegex&quot;</span>
 </div>
@@ -291,7 +294,7 @@ MatchResult
 <div>
 <span class="langKeyword">end</span> <span class="langKeyword">tell</span>
 </div>
-<br /><br />
+<br />
 <div>
 <span class="comment">-- Replace</span>
 </div>
@@ -306,6 +309,22 @@ MatchResult
 </div>
 <div style="text-indent:4ex;">
 <span class="comment">(*https://www.script-factory.net*)</span>
+</div>
+<div>
+<span class="langKeyword">end</span> <span class="langKeyword">tell</span>
+</div>
+<br />
+<div>
+<span class="comment">-- split</span>
+</div>
+<div>
+<span class="langKeyword">tell</span> <span class="userDefine">XRegex's</span> <span class="userDefine">make_with</span><span class="normal">(&quot;\\s*,\\s*&quot;)</span>
+</div>
+<div style="text-indent:4ex;">
+<span class="commandName">log</span> <span class="userDefine">split</span><span class="normal">(&quot;a	,	b,c&quot;)</span>
+</div>
+<div style="text-indent:4ex;">
+<span class="comment">(*a, b, c*)</span>
 </div>
 <div>
 <span class="langKeyword">end</span> <span class="langKeyword">tell</span>
@@ -332,6 +351,8 @@ MatchResult
 <p>Returns the number of matches of the regular expression in the text.</p>
 <h3 id="replace"><a href="pages/replace.html">replace</a></h3>
 <p>Returns a new text containing matching regular expressions replaced with the template text.</p>
+<h3 id="split"><a href="pages/split.html">split</a></h3>
+<p>Returns a list by splitting a given text with delimiters which are matched texts with the pattern. </p>
 <h2 id="MatchResult">MatchResult </h2>
 <p>MatchResult is a wapper of <a href="https://developer.apple.com/documentation/foundation/nstextcheckingresult?language=objc">NSTextCheckingResult</a> which expresses pattern maching results. Each MatchResult object contains infomation about matched texts with the pattern and caputred groups. These infomation can be obtained by using <a href="pages/capture.html">capture</a> and <a href="pages/range.html">range</a> methods.</p>
 <p>MatchResult objects are returned by <a href="pages/search.html">search</a>, <a href="pages/search_all.html">search_all</a>, <a href="pages/first_match.html">first_match</a> and <a href="pages/matches_in.html">matches_in</a>.</p>
